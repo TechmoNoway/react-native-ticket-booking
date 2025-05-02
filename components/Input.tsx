@@ -11,7 +11,7 @@ export function Input(props: InputProps) {
         {
           fontSize: 16,
           borderRadius: 16,
-          backgroundColor: "Lightgray",
+          backgroundColor: "lightgray",
           color: "black",
         },
       ]}
