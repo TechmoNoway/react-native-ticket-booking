@@ -1,10 +1,10 @@
 import { Redirect, Stack } from "expo-router";
 
 export default function AppLayout() {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   if (!isLoggedIn) {
-    return <Redirect href="../login" />;
+    return <Redirect href="/login" />;
   }
 
   return <Stack screenOptions={{ headerShown: false }} />;

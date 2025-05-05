@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
 import { HStack } from "@/components/HStack";
 import { Input } from "@/components/Input";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
@@ -8,8 +9,15 @@ import { useState } from "react";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 
 export default function Login() {
-  const [email, setEmail] = useState<string>("");
+  const [authMode, setAuthMode] = useState<"login" | "register">(
+    "login"
+  );
   const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+
+  function onToggleAuthMode() {
+    setAuthMode(authMode === "login" ? "register" : "login");
+  }
 
   return (
     <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
@@ -62,8 +70,18 @@ export default function Login() {
               />
             </VStack>
 
-            <Button isLoading={false} onPress={() => {}}></Button>
+            <Button isLoading={false} onPress={() => {}}>
+              {authMode === "login" ? "Login" : "Register"}
+            </Button>
           </VStack>
+
+          <Divider w={"90%"} />
+
+          <Text onPress={onToggleAuthMode} fontSize={16} underline>
+            {authMode === "login"
+              ? "Register new account"
+              : "Login to account"}
+          </Text>
         </VStack>
       </ScrollView>
     </KeyboardAvoidingView>
