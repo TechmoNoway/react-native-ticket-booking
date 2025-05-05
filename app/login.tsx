@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button";
 import { HStack } from "@/components/HStack";
 import { Input } from "@/components/Input";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
@@ -60,6 +61,8 @@ export default function Login() {
                 p={14}
               />
             </VStack>
+
+            <Button isLoading={false} onPress={() => {}}></Button>
           </VStack>
         </VStack>
       </ScrollView>
