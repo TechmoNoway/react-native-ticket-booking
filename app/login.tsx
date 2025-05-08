@@ -5,15 +5,22 @@ import { Input } from "@/components/Input";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Text } from "@/components/Text";
 import { VStack } from "@/components/VStack";
+import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 
 export default function Login() {
+  const { authenticate, isLoggedIn, isLoadingAuth } = useAuth();
+
   const [authMode, setAuthMode] = useState<"login" | "register">(
     "login"
   );
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+
+  async function onAuthenticate() {
+    await authenticate(authMode, email, password);
+  }
 
   function onToggleAuthMode() {
     setAuthMode(authMode === "login" ? "register" : "login");
@@ -70,7 +77,10 @@ export default function Login() {
               />
             </VStack>
 
-            <Button isLoading={false} onPress={() => {}}>
+            <Button
+              isLoading={isLoadingAuth}
+              onPress={onAuthenticate}
+            >
               {authMode === "login" ? "Login" : "Register"}
             </Button>
           </VStack>
