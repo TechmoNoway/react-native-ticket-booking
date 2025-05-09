@@ -1,4 +1,4 @@
-import { EventResponse } from "@/types/event";
+import { EventListResponse, EventResponse } from "@/types/event";
 import { Api } from "./api";
 
 async function createOne(
@@ -13,7 +13,7 @@ async function getOne(id: string): Promise<EventResponse> {
   return Api.get(`/event/${id}`);
 }
 
-async function getAll(): Promise<EventResponse> {
+async function getAll(): Promise<EventListResponse> {
   return Api.get("/event");
 }
 
@@ -37,3 +37,5 @@ const eventService = {
   updateOne,
   deleteOne,
 };
+
+export { eventService };
