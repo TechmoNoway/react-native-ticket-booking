@@ -6,15 +6,15 @@ async function createOne(
   location: string,
   date: string
 ): Promise<EventResponse> {
-  return Api.post("/event", { name, location, date });
+  return Api.post("/events", { name, location, date });
 }
 
 async function getOne(id: string): Promise<EventResponse> {
-  return Api.get(`/event/${id}`);
+  return Api.get(`/events/${id}`);
 }
 
 async function getAll(): Promise<EventListResponse> {
-  return Api.get("/event");
+  return Api.get("/events");
 }
 
 async function updateOne(
@@ -23,11 +23,11 @@ async function updateOne(
   location: string,
   date: string
 ): Promise<EventResponse> {
-  return Api.put(`/event/${id}`, { name, location, date });
+  return Api.put(`/events/${id}`, { name, location, date });
 }
 
 async function deleteOne(id: string): Promise<null> {
-  return Api.delete(`/event/${id}`);
+  return Api.delete(`/events/${id}`);
 }
 
 const eventService = {

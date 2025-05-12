@@ -2,13 +2,7 @@ import { userService } from "@/services/user";
 import { User } from "@/types/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 interface AuthContextProps {
   isLoggedIn: boolean;
@@ -28,9 +22,7 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-export function AuthenticationProvider({
-  children,
-}: PropsWithChildren) {
+export function AuthenticationProvider({ children }: PropsWithChildren) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -73,6 +65,7 @@ export function AuthenticationProvider({
         await AsyncStorage.setItem("user", JSON.stringify(user));
         setUser(user);
         router.replace("(authed)");
+        setIsLoggedIn(true);
       }
     } catch (error) {
       setIsLoggedIn(false);

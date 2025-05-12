@@ -52,7 +52,7 @@ export default function EventsScreen() {
       headerTitle: "Events",
       headerRight: user?.role === UserRole.Manager ? headerRight : null,
     });
-  }, [fetchEvents]);
+  }, []);
 
   return (
     <VStack flex={1} p={20} pb={0} gap={20}>
@@ -82,7 +82,8 @@ export default function EventsScreen() {
                     {event.name}
                   </Text>
                   <Text fontSize={26} bold>
-                    |
+                    {" "}
+                    |{" "}
                   </Text>
                   <Text fontSize={16} bold>
                     {event.location}
