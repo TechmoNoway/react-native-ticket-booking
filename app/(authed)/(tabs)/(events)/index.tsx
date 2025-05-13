@@ -8,8 +8,8 @@ import { useAuth } from "@/context/AuthContext";
 import { eventService } from "@/services/events";
 import { Event } from "@/types/event";
 import { UserRole } from "@/types/user";
-import { router, useNavigation } from "expo-router";
-import { useEffect, useState } from "react";
+import { router, useFocusEffect, useNavigation } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
 import { Alert, FlatList, TouchableOpacity } from "react-native";
 
 export default function EventsScreen() {
@@ -45,19 +45,18 @@ export default function EventsScreen() {
     }
   };
 
-  useEffect(() => {
-    const subscribe = navigation.addListener("focus", fetchEvents);
-    return subscribe;
-  }, [navigation, fetchEvents]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchEvents();
+    }, [])
+  );
 
   useEffect(() => {
-    fetchEvents();
-
     navigation.setOptions({
       headerTitle: "Events",
       headerRight: user?.role === UserRole.Manager ? headerRight : null,
     });
-  }, []);
+  }, [navigation, user]);
 
   return (
     <VStack flex={1} p={20} pb={0} gap={20}>

@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import DateTimePicker from "@/components/DateTimePicker";
 import { Input } from "@/components/Input";
 import { Text } from "@/components/Text";
 import { VStack } from "@/components/VStack";
@@ -28,56 +29,59 @@ export default function NewEvent() {
     }
   }
 
+  function onChangeDate(date?: Date) {
+    setDate(date || new Date())
+  }
+
   useEffect(() => {
     navigation.setOptions({ headerTitle: "New Event" });
   }, []);
 
   return (
-    <>
-      <VStack m={20} flex={1} gap={30}>
-        <VStack gap={5}>
-          <Text ml={10} fontSize={14} color="gray">
-            Name
-          </Text>
-          <Input
-            value={name}
-            onChangeText={setName}
-            placeholder="Name"
-            placeholderTextColor="darkgray"
-            h={48}
-            p={14}
-          />
-        </VStack>
-
-        <VStack gap={5}>
-          <Text ml={10} fontSize={14} color="gray">
-            Location
-          </Text>
-          <Input
-            value={location}
-            onChangeText={setLocation}
-            placeholder="Name"
-            placeholderTextColor="darkgray"
-            h={48}
-            p={14}
-          />
-        </VStack>
-
-        <VStack gap={5}>
-          <Text ml={10} fontSize={14} color="gray">
-            Date
-          </Text>
-        </VStack>
-
-        <Button
-          mt={"auto"}
-          isLoading={isSubmitting}
-          disabled={isSubmitting}
-          onPress={onSubmit}
-        >
-          Save
-        </Button>
+    <VStack m={20} flex={1} gap={30}>
+      <VStack gap={5}>
+        <Text ml={10} fontSize={14} color="gray">
+          Name
+        </Text>
+        <Input
+          value={name}
+          onChangeText={setName}
+          placeholder="Name"
+          placeholderTextColor="darkgray"
+          h={48}
+          p={14}
+        />
       </VStack>
-    </>
+
+      <VStack gap={5}>
+        <Text ml={10} fontSize={14} color="gray">
+          Location
+        </Text>
+        <Input
+          value={location}
+          onChangeText={setLocation}
+          placeholder="Name"
+          placeholderTextColor="darkgray"
+          h={48}
+          p={14}
+        />
+      </VStack>
+
+      <VStack gap={5}>
+        <Text ml={10} fontSize={14} color="gray">
+          Date
+        </Text>
+        <DateTimePicker onChange={onChangeDate} currentDate={date} />
+      </VStack>
+
+      <Button
+        mt={"auto"}
+        isLoading={isSubmitting}
+        disabled={isSubmitting}
+        onPress={onSubmit}
+      >
+        Save
+      </Button>
+    </VStack>
   );
 }
