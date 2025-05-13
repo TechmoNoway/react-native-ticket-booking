@@ -46,6 +46,11 @@ export default function EventsScreen() {
   };
 
   useEffect(() => {
+    const subscribe = navigation.addListener("focus", fetchEvents);
+    return subscribe;
+  }, [navigation, fetchEvents]);
+
+  useEffect(() => {
     fetchEvents();
 
     navigation.setOptions({
